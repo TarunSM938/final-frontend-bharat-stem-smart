@@ -2,6 +2,7 @@
 
 import os
 import datetime
+import time
 from rest_framework.decorators import api_view, parser_classes
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
@@ -57,7 +58,7 @@ def create_program(request):
         upload_dir = os.path.join(settings.MEDIA_ROOT, 'programs')
         os.makedirs(upload_dir, exist_ok=True)
 
-        filename = f"{datetime.datetime.utcnow().timestamp()}_{image_file.name}"
+        filename = f"{int(time.time())}_{image_file.name}"
         full_path = os.path.join(upload_dir, filename)
 
         with open(full_path, 'wb+') as f:
@@ -126,7 +127,7 @@ def edit_program(request, program_id):
         upload_dir = os.path.join(settings.MEDIA_ROOT, 'programs')
         os.makedirs(upload_dir, exist_ok=True)
 
-        filename = f"{datetime.datetime.utcnow().timestamp()}_{image_file.name}"
+        filename = f"{int(time.time())}_{image_file.name}"
         full_path = os.path.join(upload_dir, filename)
 
         with open(full_path, 'wb+') as f:
